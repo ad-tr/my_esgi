@@ -5,11 +5,12 @@ import DesktopNavbar from "@/components/DesktopNavbar";
 import { HiOutlineSearch, HiOutlineMenuAlt2 } from "react-icons/hi";
 import Image from "next/image";
 import { HiOutlineChat, HiOutlineHeart, HiOutlineInformationCircle, HiOutlineBookmark } from "react-icons/hi";
-import { use, useState } from "react";
+import { useState } from "react";
 
-import posts from "./posts.json";
+import favoris from "./favoris.json";
 
-export default function Posts() {
+export default function Favoris() {
+
     const [search, setSearch] = useState<string>("");
     const [openModal, setOpenModal] = useState<boolean>(false)
 
@@ -21,8 +22,8 @@ export default function Posts() {
 
 
     const postToShow = search !== "" 
-        ? posts.filter((post) => post.description && post.description.includes(search))
-        : posts;
+        ? favoris.filter((favoris1) => favoris1.description && favoris1.description.includes(search))
+        : favoris;
     
     
     return (
@@ -138,7 +139,6 @@ export default function Posts() {
                                     />
                                 )}
 
-                                {/* Footer des actions */}
                                 <div className="flex justify-between m-2">
                                     <div className="flex gap-3">
                                         <HiOutlineHeart className="w-6 h-6 text-[#4074F8]" />

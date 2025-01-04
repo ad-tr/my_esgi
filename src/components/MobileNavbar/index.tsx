@@ -3,30 +3,26 @@ import Link from "next/link";
 
 export default function MobileNavbar(){
     return(
-        <div className="sm:hidden block h-24 w-screen p-2 absolute bottom-0">
-            <div className="flex w-full h-full rounded-full bg-[#EAEEF5] justify-between items-center px-10">  
+        <div className="md:hidden h-20 w-full fixed bottom-0 flex justify-center">
+            <div className="flex w-4/6 h-full rounded-full bg-slate-50 justify-between items-center px-6">  
                 <Link href="/posts" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
-                    <HiOutlineHome className="w-8 h-8 text-[#4074F8]"/>
+                    <HiOutlineHome className="w-5 h-5 text-[#4074F8]"/>
                 </Link>
 
-                <Link href="/posts" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
-                    <HiOutlineShoppingBag className="w-8 h-8 text-[#4074F8]"/>
+                <Link href="/location" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
+                    <HiOutlineDatabase className="w-5 h-5 text-[#4074F8]"/>
                 </Link>
 
-                <Link href="/posts" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
-                    <HiOutlineDatabase className="w-8 h-8 text-[#4074F8]"/>
+                <Link href="/favoris" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
+                    <HiOutlineBookmark className="w-5 h-5 text-[#4074F8]"/>
                 </Link>
 
-                <Link href="/posts" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
-                    <HiOutlineBookmark className="w-8 h-8 text-[#4074F8]"/>
+                <Link href="/publications" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
+                    <HiOutlineChat className="w-5 h-5 text-[#4074F8]"/>
                 </Link>
 
-                <Link href="/posts" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
-                    <HiOutlineChat className="w-8 h-8 text-[#4074F8]"/>
-                </Link>
-
-                <Link href="/posts" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
-                    <HiOutlineCog className="w-8 h-8 text-[#4074F8]"/>
+                <Link href="/parametres" className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]">
+                    <HiOutlineCog className="w-5 h-5 text-[#4074F8]"/>
                 </Link>
             </div>
         </div>

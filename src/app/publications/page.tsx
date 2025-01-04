@@ -5,11 +5,11 @@ import DesktopNavbar from "@/components/DesktopNavbar";
 import { HiOutlineSearch, HiOutlineMenuAlt2 } from "react-icons/hi";
 import Image from "next/image";
 import { HiOutlineChat, HiOutlineHeart, HiOutlineInformationCircle, HiOutlineBookmark } from "react-icons/hi";
-import { use, useState } from "react";
+import { useState } from "react";
 
-import posts from "./posts.json";
+import posts from "./publications.json";
 
-export default function Posts() {
+export default function Publications() {
     const [search, setSearch] = useState<string>("");
     const [openModal, setOpenModal] = useState<boolean>(false)
 
@@ -107,7 +107,7 @@ export default function Posts() {
                                             {post.authorId}
                                         </p>
                                         <div>
-                                            <p className="font-[family-name:var(--font-geist-sans)] text-md font-medium leading-5">Auteur {post.authorId}</p>
+                                            <p className="font-[family-name:var(--font-geist-sans)] text-md font-medium leading-5">Vous</p>
                                             <p className="font-[family-name:var(--font-geist-sans)] text-sm text-gray-500">
                                                 Posté le {new Date(post.postDate).toLocaleDateString("fr-FR", {
                                                     day: "2-digit",

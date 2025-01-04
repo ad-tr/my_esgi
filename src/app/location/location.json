@@ -1,0 +1,35 @@
+[
+    {
+    "product": {
+      "id": 1,
+      "name": "Baie technologique",
+      "image": {
+        "src": "https://img.freepik.com/photos-premium/framboise-est-carte-mere-ordinateur_1168863-7845.jpg?w=1380",
+        "alt": "Yepp"
+      },
+      "quantityAvailable": 8
+    }
+  },
+  {
+    "product": {
+      "id": 1,
+      "name": "Baie technologique",
+      "image": {
+        "src": "https://img.freepik.com/photos-premium/framboise-est-carte-mere-ordinateur_1168863-7845.jpg?w=1380",
+        "alt": "Yepp"
+      },
+      "quantityAvailable": 8
+    }
+  },
+  {
+    "product": {
+      "id": 1,
+      "name": "Baie technologique",
+      "image": {
+        "src": "https://img.freepik.com/photos-premium/framboise-est-carte-mere-ordinateur_1168863-7845.jpg?w=1380",
+        "alt": "Yepp"
+      },
+      "quantityAvailable": 8
+    }
+  }
+]

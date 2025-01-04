@@ -55,7 +55,7 @@ export default function Home() {
     <div className="flex bg-[#D7E2FF] h-screen w-screen items-center justify-center">
       <div className="flex flex-col w-2/3 lg:w-1/2 lg:h-1/2 items-center -mt-16">
         <p className="font-[family-name:var(--font-geist-mono)] text-3xl font-bold text-[#283D72] w-fit mb-10">Bienvenue sur MyESGI</p>
-        <div className="bg-[#EAEEF5] p-5 rounded-2xl">
+        <div className="bg-slate-50 p-5 rounded-2xl">
           <div>
             <p className="font-[family-name:var(--font-geist-mono)] text-2xl font-bold">Connexion</p>
             <p className="font-[family-name:var(--font-geist-sans)] text-sm font-light">Votre portail intranet pour accéder à toutes les ressources et services de l'ESGI.</p>
