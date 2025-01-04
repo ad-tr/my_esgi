@@ -13,28 +13,29 @@ export default function Inscription() {
   
 
   const checkIdentifiant = (identifiant: string) => {
-    const checkFormat = /\w{5,}/
-    const resultTest = checkFormat.exec(identifiant)
+    const checkFormat = /\w{5,}/;
+    const resultTest = checkFormat.exec(identifiant);
     
-    if (resultTest){
-        setMessageId(false)
-        return false
+    if (resultTest) {
+        setMessageId(false);
+        return true;
     }
-    setMessageId(true)
-  }
-
-
-  // todo implement password check with api
-  const checkPassword = (password: string) => {
-    const checkFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/g
-    const resultTest = checkFormat.exec(password)
-
-    if (resultTest){
-        setMessagePw(false)
-        return false
+    setMessageId(true);
+    return false;
     }
-    setMessagePw(true)
-  }
+
+    const checkPassword = (password: string) => {
+        const checkFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/g;
+        const resultTest = checkFormat.exec(password);
+
+        if (resultTest) {
+            setMessagePw(false);
+            return true;
+        }
+        setMessagePw(true);
+        return false;
+    }
+
 
   const handleConnect = () => {
     const isPasswordValid = checkPassword(passwdValue);
