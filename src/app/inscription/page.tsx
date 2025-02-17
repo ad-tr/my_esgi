@@ -6,41 +6,35 @@ import { useState } from "react";
 
 export default function Inscription() {
   const router = useRouter();
-  const [idValue, setIdValue] = useState<string>("");
-  const [passwdValue, setPasswdValue] = useState<string>("");
-  const [messageId, setMessageId] = useState<boolean | undefined>(undefined);
-  const [messagePw, setMessagePw] = useState<boolean | undefined>(undefined);
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const checkIdentifiant = (identifiant: string) => {
-    const checkFormat = /\w{5,}/;
-    const resultTest = checkFormat.exec(identifiant);
+  const handleRegister = async () => {
+    setLoading(true);
+    setErrorMessage(null);
 
-    if (resultTest) {
-      setMessageId(false);
-      return true;
-    }
-    setMessageId(true);
-    return false;
-  };
+    try {
+      const response = await fetch(
+        `https://api.adaoud.dev/users/Register?FirstName=${encodeURIComponent(firstName)}&LastName=${encodeURIComponent(lastName)}&Email=${encodeURIComponent(email)}&Password=${encodeURIComponent(password)}`,
+        {
+          method: 'POST'
+        }
+      );
 
-  const checkPassword = (password: string) => {
-    const checkFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/g;
-    const resultTest = checkFormat.exec(password);
-
-    if (resultTest) {
-      setMessagePw(false);
-      return true;
-    }
-    setMessagePw(true);
-    return false;
-  };
-
-  const handleConnect = () => {
-    const isPasswordValid = checkPassword(passwdValue);
-    const isIdentifiantValid = checkIdentifiant(idValue);
-
-    if (isPasswordValid == false && isIdentifiantValid == false) {
-      router.push("/posts");
+      if (response.status === 200) {
+        router.push("/posts");
+      } else {
+        setErrorMessage("Erreur lors de l'inscription. Veuillez vérifier vos informations.");
+      }
+    } catch (error) {
+      setErrorMessage("Erreur réseau lors de l'inscription.");
+      console.error("Erreur lors de l'inscription:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,7 +49,7 @@ export default function Inscription() {
       <div className="flex bg-[#D7E2FF] h-screen w-screen items-center justify-center">
         <div className="flex flex-col w-2/3 lg:w-1/2 lg:h-1/2 items-center -mt-16">
           <p className="font-[family-name:var(--font-geist-mono)] text-3xl font-bold text-[#283D72] w-fit mb-10">
-            Bienvenue sur MyESGI
+            Inscription sur MyESGI
           </p>
           <div className="bg-slate-50 p-5 rounded-2xl">
             <div>
@@ -63,72 +57,55 @@ export default function Inscription() {
                 Inscription
               </p>
               <p className="font-[family-name:var(--font-geist-sans)] text-sm font-light">
-                Votre portail intranet pour accéder à toutes les ressources et
-                services de l'ESGI.
+                Créez votre compte pour accéder aux ressources ESGI.
               </p>
             </div>
             <div className="mt-6">
-              <p className="font-[family-name:var(--font-geist-sans) text-md mb-1">
-                Identifiant
-              </p>
               <input
-                onChange={(e) => setIdValue(e.target.value)}
-                value={idValue}
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
+                placeholder="Prénom"
                 type="text"
-                className="w-full rounded-md p-2 bg-[#D7E2FF]"
+                className="w-full rounded-md p-2 mb-3 bg-[#D7E2FF]"
               />
-
-              <p className="font-[family-name:var(--font-geist-sans)] text-md mt-4 mb-1">
-                Mot de passe
-              </p>
               <input
-                onChange={(e) => setPasswdValue(e.target.value)}
-                value={passwdValue}
-                type="password"
-                className="w-full rounded-md p-2 bg-[#D7E2FF]"
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName}
+                placeholder="Nom"
+                type="text"
+                className="w-full rounded-md p-2 mb-3 bg-[#D7E2FF]"
               />
-
-              <p className="font-[family-name:var(--font-geist-sans)] text-md mt-4 mb-1">
-                Confirmer le mot de passe
-              </p>
               <input
-                onChange={(e) => setPasswdValue(e.target.value)}
-                value={passwdValue}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Email"
+                type="email"
+                className="w-full rounded-md p-2 mb-3 bg-[#D7E2FF]"
+              />
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                placeholder="Mot de passe"
                 type="password"
-                className="w-full rounded-md p-2 bg-[#D7E2FF]"
+                className="w-full rounded-md p-2 mb-3 bg-[#D7E2FF]"
               />
 
-              {messageId == true && (
+              {errorMessage && (
                 <div className="font-[family-name:var(--font-geist-sans)] border-2 border-red-400 my-3 p-3 rounded-md">
-                  <p className="text-sm text-red-400">
-                    Votre identifiant doit au moins contenir 5 caractères
-                  </p>
-                </div>
-              )}
-
-              {messagePw == true && (
-                <div className="font-[family-name:var(--font-geist-sans)] border-2 border-red-400 my-3 p-3 rounded-md">
-                  <p className="text-sm text-red-400">
-                    Votre mot de passe doit respecter les critères suivants :
-                  </p>
-                  <ul className="text-sm text-red-400">
-                    <li>- Contenir au moins 8 caractères.</li>
-                    <li>- Contenir au moins 3 chiffres.</li>
-                    <li>- Contenir au moins une majuscule.</li>
-                  </ul>
+                  <p className="text-sm text-red-400">{errorMessage}</p>
                 </div>
               )}
 
               <button
-                className="w-full rounded-md p-2 bg-[#283D72] mt-5 mb-2 text-[#D7E2FF]"
-                onClick={handleConnect}
+                className="w-full rounded-md p-2 bg-[#283D72] mt-5 mb-2 text-[#D7E2FF] disabled:opacity-50"
+                onClick={handleRegister}
+                disabled={loading}
               >
-                S'inscrire
+                {loading ? "Inscription en cours..." : "S'inscrire"}
               </button>
             </div>
             <p className="font-[family-name:var(--font-geist-sans)] font-light text-xs">
-              Accédez rapidement aux outils pédagogiques, aux actualités, et aux
-              services étudiants.
+              Déjà un compte ? <Link href="/" className="underline">Connectez-vous</Link>
             </p>
           </div>
         </div>

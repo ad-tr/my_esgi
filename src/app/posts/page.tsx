@@ -10,37 +10,89 @@ import {
   HiOutlineInformationCircle,
   HiOutlineBookmark,
 } from "react-icons/hi";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import posts from "./posts.json";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+type Post = {
+  id: number;
+  authorId: string;
+  postDate: string;
+  title: string;
+  description: string;
+  imgUrl?: string;
+};
 
 export default function Posts() {
+  const router = useRouter();
   const [search, setSearch] = useState<string>("");
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [posts1, setPosts1] = useState([]);
-  const [postCategory, setPostCategory] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPostCategory(e.target?.value);
-  };
+  useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const response = await fetch("https://api.adaoud.dev/users/IsLoggedIn", {
+          method: "GET",
+        });
+
+        if (response.status === 200) {
+          const data = await response.json();
+          console.log(data["isLoggedIn"])
+          if (!data["isLoggedIn"]) {
+            router.push("/");
+          } else {
+            setIsLoading(false);
+          }
+        } else {
+          router.push("/");
+        }
+      } catch (error) {
+        router.push("/");
+      }
+    };
+
+    checkLogin();
+  }, [router]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const fetchPosts = async () => {
+        setLoading(true);
+        setErrorMessage(null);
+
+        try {
+          const response = await fetch("https://api.adaoud.dev/Posts", {
+            method: "GET",
+          });
+
+          if (response.status === 200) {
+            const data = await response.json();
+            setPosts(data);
+          } else {
+            setErrorMessage("Erreur lors de la récupération des posts");
+          }
+        } catch (error) {
+          setErrorMessage("Erreur réseau lors de la récupération des posts.");
+          console.error("Erreur lors de la récupération des posts:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchPosts();
+    }
+  }, [isLoading]);
+
+  if (isLoading) {
+    return <p className="text-center text-blue-500 mt-10">Vérification en cours...</p>;
+  }
 
   const postToShow =
     search !== ""
-      ? posts.filter(
-          (post) => post.description && post.description.includes(search),
-        )
+      ? posts.filter((post) => post.description && post.description.includes(search))
       : posts;
-
-  useEffect(() => {
-    axios
-      .get("https://api.adaoud.dev/posts")
-      .then((response) => setPosts1(response.data))
-      .catch((error) =>
-        console.error("Erreur lors de la récupération des posts:", error),
-      );
-  }, []);
-
-  console.log(posts1);
 
   return (
     <>
@@ -59,69 +111,16 @@ export default function Posts() {
                 <HiOutlineSearch className="w-6 h-6 text-[#4074F8] m-1" />
               </div>
             </div>
-
-            <div className="bg-slate-50 p-1 rounded-lg">
-              <HiOutlineMenuAlt2
-                className="w-6 h-6 text-[#4074F8] m-1"
-                onClick={() => {
-                  setOpenModal(true);
-                }}
-              />
-            </div>
-
-            <div className="absolute flex bg-[#4074F8] w-10 h-10 top-0 right-0 m-2 rounded-full items-center justify-center text-white">
-              A
-            </div>
           </div>
         </div>
       </div>
 
-      {openModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-slate-50 rounded-lg w-96 p-6">
-            <h2 className="text-2xl font-bold mb-4">Filtrer les posts</h2>
-
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2" htmlFor="category">
-                Catégorie
-              </label>
-              <select
-                id="category"
-                onChange={handleCategoryChange}
-                className="w-full p-2 border border-gray-300 rounded-lg"
-              >
-                <option value="">Sélectionner une catégorie</option>
-                <option value="tech">Évenements</option>
-                <option value="business">Cours</option>
-                <option value="design">Activités</option>
-              </select>
-            </div>
-
-            <div className="flex justify-between mt-6">
-              <button
-                onClick={() => {
-                  setOpenModal(false);
-                  setPostCategory("");
-                }}
-                className="px-4 py-2 text-[#283D72] rounded-lg"
-              >
-                Fermer
-              </button>
-              <button
-                onClick={() => {
-                  setOpenModal(false);
-                }}
-                className="px-4 py-2 bg-[#283D72] text-slate-50 rounded-lg"
-              >
-                Appliquer
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="flex-col absolute w-full md:w-3/4 lg:w-4/5 xl:w-5/6 md:right-0 mt-20 justify-center">
-        {postToShow.length > 0 ? (
+        {loading ? (
+          <p className="text-center text-blue-500">Chargement des posts en cours...</p>
+        ) : errorMessage ? (
+          <p className="text-center text-red-500">{errorMessage}</p>
+        ) : postToShow.length > 0 ? (
           postToShow.map((post) => (
             <div key={post.id} className="flex w-full justify-center mb-5">
               <div className="w-[25em] md:w-[30em] lg:w-[30em] bg-slate-50 p-3 rounded-xl">
@@ -131,10 +130,10 @@ export default function Posts() {
                       {post.authorId}
                     </p>
                     <div>
-                      <p className="font-[family-name:var(--font-geist-sans)] text-md font-medium leading-5">
+                      <p className="text-md font-medium leading-5">
                         Auteur {post.authorId}
                       </p>
-                      <p className="font-[family-name:var(--font-geist-sans)] text-sm text-gray-500">
+                      <p className="text-sm text-gray-500">
                         Posté le{" "}
                         {new Date(post.postDate).toLocaleDateString("fr-FR", {
                           day: "2-digit",
@@ -157,7 +156,7 @@ export default function Posts() {
                   <p className="leading-5 text-sm mb-2">{post.description}</p>
                 </div>
 
-                {post.imgUrl && (
+                {post.imgUrl && post.imgUrl !== "string" && (
                   <Image
                     src={post.imgUrl}
                     alt={post.title}
@@ -167,7 +166,6 @@ export default function Posts() {
                   />
                 )}
 
-                {/* Footer des actions */}
                 <div className="flex justify-between m-2">
                   <div className="flex gap-3">
                     <HiOutlineHeart className="w-6 h-6 text-[#4074F8]" />

@@ -6,7 +6,7 @@ import {
   HiOutlineDatabase,
   HiOutlineBookmark,
   HiOutlineChat,
-  HiOutlineCog,
+  HiOutlineLogout,
 } from "react-icons/hi";
 
 export default function DesktopNavbar() {
@@ -62,12 +62,12 @@ export default function DesktopNavbar() {
 
         <div>
           <Link
-            href="/parametres"
+            href="/logout"
             className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]"
           >
-            <HiOutlineCog className="w-6 h-6 text-[#4074F8]" />
+            <HiOutlineLogout className="w-6 h-6 text-[#4074F8]" />
             <p className="font-[family-name:var(--font-geist-sans)] text-base font-semibold">
-              Parametres
+              Se déconnecter
             </p>
           </Link>
         </div>

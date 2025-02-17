@@ -2,45 +2,38 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
-  const [idValue, setIdValue] = useState<string>("");
-  const [passwdValue, setPasswdValue] = useState<string>("");
-  const [messageId, setMessageId] = useState<boolean | undefined>(undefined);
-  const [messagePw, setMessagePw] = useState<boolean | undefined>(undefined);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const checkIdentifiant = (identifiant: string) => {
-    const checkFormat = /\w{5,}/g;
-    const resultTest = checkFormat.exec(identifiant);
+  const handleConnect = async () => {
+    setLoading(true);
+    setErrorMessage(null);
 
-    if (resultTest) {
-      setMessageId(false);
-      return false;
+    try {
+      const response = await fetch(`https://api.adaoud.dev/users/Login?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`, {
+        method: 'POST'
+      });
+    
+      if (response.status === 200) {
+        const data = await response.json();
+        localStorage.setItem('authToken', data);
+        router.push("/posts");
+      } else {
+        setErrorMessage("Identifiant ou mot de passe incorrect.");
+      }
+    } catch (error) {
+      setErrorMessage("Erreur lors de la connexion.");
+      console.error("Erreur lors de la connexion:", error);
+    } finally {
+      setLoading(false);
     }
-    setMessageId(true);
-  };
 
-  // todo implement password check with api
-  const checkPassword = (password: string) => {
-    const checkFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/g;
-    const resultTest = checkFormat.exec(password);
-
-    if (resultTest) {
-      setMessagePw(false);
-      return false;
-    }
-    setMessagePw(true);
-  };
-
-  const handleConnect = () => {
-    if (
-      checkPassword(passwdValue) == false &&
-      checkIdentifiant(idValue) == false
-    ) {
-      router.push("/posts");
-    }
   };
 
   return (
@@ -71,8 +64,8 @@ export default function Home() {
                 Identifiant
               </p>
               <input
-                onChange={(e) => setIdValue(e.target.value)}
-                value={idValue}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 type="text"
                 className="w-full rounded-md p-2 bg-[#D7E2FF]"
               />
@@ -81,25 +74,24 @@ export default function Home() {
                 Mot de passe
               </p>
               <input
-                onChange={(e) => setPasswdValue(e.target.value)}
-                value={passwdValue}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 type="password"
                 className="w-full rounded-md p-2 bg-[#D7E2FF]"
               />
 
-              {(messagePw == true || messageId == true) && (
+              {errorMessage && (
                 <div className="font-[family-name:var(--font-geist-sans)] border-2 border-red-400 mt-3 p-3 rounded-md">
-                  <p className="text-sm text-red-400">
-                    Veuillez rentrer un identifiant et un mot de passe correct
-                  </p>
+                  <p className="text-sm text-red-400">{errorMessage}</p>
                 </div>
               )}
 
               <button
-                className="w-full rounded-md p-2 bg-[#283D72] mt-5 mb-2 text-[#D7E2FF]"
+                className="w-full rounded-md p-2 bg-[#283D72] mt-5 mb-2 text-[#D7E2FF] disabled:opacity-50"
                 onClick={handleConnect}
+                disabled={loading}
               >
-                Connexion
+                {loading ? "Connexion en cours..." : "Connexion"}
               </button>
             </div>
             <Link
