@@ -67,6 +67,7 @@ export default function Posts() {
         try {
           const response = await fetch("https://api.adaoud.dev/Posts", {
             method: "GET",
+            credentials: "include"
           });
 
           if (response.status === 200) {
