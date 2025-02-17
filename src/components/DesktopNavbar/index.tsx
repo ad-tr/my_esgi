@@ -8,8 +8,29 @@ import {
   HiOutlineChat,
   HiOutlineLogout,
 } from "react-icons/hi";
+import { useRouter } from "next/navigation";
 
 export default function DesktopNavbar() {
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(`https://api.adaoud.dev/users/Logout}`, {
+        method: 'POST',
+        credentials: "include"
+      });
+    
+      if (response.status === 200) {
+        const data = await response.json();
+        localStorage.setItem('authToken', data);
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la connexion:", error);
+    }
+  };
+
   return (
     <div className="fixed md:block hidden md:w-1/4 lg:w-1/5 xl:w-1/6 h-screen p-2">
       <div className="relative flex flex-col w-full h-full rounded-2xl bg-slate-50 p-5 justify-between">
@@ -62,8 +83,9 @@ export default function DesktopNavbar() {
 
         <div>
           <Link
-            href="/logout"
+            href="/"
             className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]"
+            onClick={()=>handleLogout()}
           >
             <HiOutlineLogout className="w-6 h-6 text-[#4074F8]" />
             <p className="font-[family-name:var(--font-geist-sans)] text-base font-semibold">
