@@ -35,6 +35,7 @@ export default function Posts() {
       try {
         const response = await fetch("https://api.adaoud.dev/users/IsLoggedIn", {
           method: "GET",
+          credentials: "include"
         });
 
         if (response.status === 200) {
