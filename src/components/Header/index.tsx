@@ -16,6 +16,7 @@ export default function Header() {
                 type="text"
                 placeholder="Rechercher"
                 onChange={(e) => setSearch(e.target.value)}
+                value={search}
                 className="bg-transparent w-full h-10 outline-none px-2"
               />
               <HiOutlineSearch className="w-6 h-6 text-[#4074F8] m-1" />

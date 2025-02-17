@@ -1,6 +1,5 @@
 import {
   HiOutlineHome,
-  HiOutlineShoppingBag,
   HiOutlineDatabase,
   HiOutlineBookmark,
   HiOutlineChat,

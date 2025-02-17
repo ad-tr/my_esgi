@@ -56,7 +56,7 @@ export default function Home() {
               </p>
               <p className="font-[family-name:var(--font-geist-sans)] text-sm font-light">
                 Votre portail intranet pour accéder à toutes les ressources et
-                services de l'ESGI.
+                services de l&apos;ESGI.
               </p>
             </div>
             <div className="mt-6">

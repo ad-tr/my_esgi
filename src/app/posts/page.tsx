@@ -2,7 +2,7 @@
 
 import MobileNavbar from "@/components/MobileNavbar";
 import DesktopNavbar from "@/components/DesktopNavbar";
-import { HiOutlineSearch, HiOutlineMenuAlt2 } from "react-icons/hi";
+import { HiOutlineSearch } from "react-icons/hi";
 import Image from "next/image";
 import {
   HiOutlineChat,
@@ -49,6 +49,7 @@ export default function Posts() {
           router.push("/");
         }
       } catch (error) {
+        console.log(error)
         router.push("/");
       }
     };
