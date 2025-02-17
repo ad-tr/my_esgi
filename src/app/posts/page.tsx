@@ -5,7 +5,7 @@ import DesktopNavbar from "@/components/DesktopNavbar";
 import { HiOutlineSearch, HiOutlineMenuAlt2 } from "react-icons/hi";
 import Image from "next/image";
 import { HiOutlineChat, HiOutlineHeart, HiOutlineInformationCircle, HiOutlineBookmark } from "react-icons/hi";
-import { use, useState } from "react";
+import { useState } from "react";
 
 import posts from "./posts.json";
 
@@ -23,7 +23,7 @@ export default function Posts() {
     const postToShow = search !== "" 
         ? posts.filter((post) => post.description && post.description.includes(search))
         : posts;
-    
+
     
     return (
         <>

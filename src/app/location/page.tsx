@@ -102,7 +102,7 @@ export default function Rent(){
 
                 { filteredLocations.length > 0 ? (
                     filteredLocations.map((location) => (
-                        <div className="flex w-full justify-center mb-5">
+                        <div key={location.product.id} className="flex w-full justify-center mb-5">
                             <div className="flex w-[25em] md:w-[30em] lg:w-[40em] bg-slate-50 rounded-xl items-center">
                                 <Image src={location.product.image.src} alt={location.product.image.alt} className="rounded-s-lg" width={200} height={200}/>
                                 <div className="p-3 w-full">
