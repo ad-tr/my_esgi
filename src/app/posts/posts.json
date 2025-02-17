@@ -1,26 +1,26 @@
 [
-    {
-        "id": 1,
-        "title": "Découvrez la vie étudiante à l'ESGI",
-        "description": "Plongez dans l'univers dynamique et innovant de l'ESGI, où les étudiants ne sont pas seulement formés, mais stimulés à créer, collaborer et innover. Entre les projets en équipe, les conférences avec des experts du secteur, et des événements de networking, la vie à l'ESGI est une aventure passionnante pour tous ceux qui veulent se préparer aux défis de demain.",
-        "authorId": 1,
-        "imgUrl": "https://img.freepik.com/photos-gratuite/temps-libre-etudiant-rythme-vie-du-campus-du-baccalaureat-cinq-etudiants-amicaux-marchent_8353-6408.jpg?t=st%3D1735990837~exp%3D1735994437~hmac%3D2901b669c0bb6957d7c5d8eb9a868cc9b9f3c8be9e8cdd49382d587569556286&w=1380",
-        "postDate": "2025-01-04T12:00:00"
-    },
-    {
-        "id": 2,
-        "title": "Rejoindre l'ESGI, une porte ouverte sur l’avenir",
-        "description": "L'ESGI est plus qu’une simple école, c’est un lieu où les étudiants prennent leur avenir en main. Grâce à des formations de pointe en informatique, cybersécurité, et développement, l'ESGI vous prépare aux métiers les plus recherchés de demain. Que vous soyez passionné par la technologie, l’innovation ou l’entrepreneuriat, vous trouverez votre place ici. Prêt à relever de nouveaux défis ?",
-        "authorId": 1,
-        "imgUrl": "https://img.freepik.com/photos-premium/cambridge-etats-unis-29-avril-2015-gens-hollis-hall-stoughton-hall-harvard-yard-universite-harvard-massachusetts-ma-etats-unis-ils-servent-dortoirs-pour-etudiants-harvard_250132-14233.jpg?w=1380",
-        "postDate": "2024-12-30T16:30:00"
-    },
-    {
-        "id": 3,
-        "title": "Les projets collaboratifs à l'ESGI",
-        "description": "L’ESGI place la collaboration au cœur de son programme. À travers des projets concrets, les étudiants apprennent à travailler en équipe, à résoudre des problèmes complexes, et à développer des solutions technologiques innovantes. Ces projets sont l'occasion idéale pour mettre en pratique vos compétences, apprendre des autres, et créer des liens avec de futurs partenaires professionnels.",
-        "authorId": 1,
-        "imgUrl": "https://img.freepik.com/photos-gratuite/amis-qui-etudient-pres-du-batiment-lac_23-2147850684.jpg?t=st=1735990836~exp=1735994436~hmac=9bd2e337fced6fdf2664e48766a55130d1f6536ef252cdc14345389747c77da2&w=1380",
-        "postDate": "2024-12-28T10:45:00"
-    }
+  {
+    "id": 1,
+    "title": "Découvrez la vie étudiante à l'ESGI",
+    "description": "Plongez dans l'univers dynamique et innovant de l'ESGI, où les étudiants ne sont pas seulement formés, mais stimulés à créer, collaborer et innover. Entre les projets en équipe, les conférences avec des experts du secteur, et des événements de networking, la vie à l'ESGI est une aventure passionnante pour tous ceux qui veulent se préparer aux défis de demain.",
+    "authorId": 1,
+    "imgUrl": "https://img.freepik.com/photos-gratuite/temps-libre-etudiant-rythme-vie-du-campus-du-baccalaureat-cinq-etudiants-amicaux-marchent_8353-6408.jpg?t=st%3D1735990837~exp%3D1735994437~hmac%3D2901b669c0bb6957d7c5d8eb9a868cc9b9f3c8be9e8cdd49382d587569556286&w=1380",
+    "postDate": "2025-01-04T12:00:00"
+  },
+  {
+    "id": 2,
+    "title": "Rejoindre l'ESGI, une porte ouverte sur l’avenir",
+    "description": "L'ESGI est plus qu’une simple école, c’est un lieu où les étudiants prennent leur avenir en main. Grâce à des formations de pointe en informatique, cybersécurité, et développement, l'ESGI vous prépare aux métiers les plus recherchés de demain. Que vous soyez passionné par la technologie, l’innovation ou l’entrepreneuriat, vous trouverez votre place ici. Prêt à relever de nouveaux défis ?",
+    "authorId": 1,
+    "imgUrl": "https://img.freepik.com/photos-premium/cambridge-etats-unis-29-avril-2015-gens-hollis-hall-stoughton-hall-harvard-yard-universite-harvard-massachusetts-ma-etats-unis-ils-servent-dortoirs-pour-etudiants-harvard_250132-14233.jpg?w=1380",
+    "postDate": "2024-12-30T16:30:00"
+  },
+  {
+    "id": 3,
+    "title": "Les projets collaboratifs à l'ESGI",
+    "description": "L’ESGI place la collaboration au cœur de son programme. À travers des projets concrets, les étudiants apprennent à travailler en équipe, à résoudre des problèmes complexes, et à développer des solutions technologiques innovantes. Ces projets sont l'occasion idéale pour mettre en pratique vos compétences, apprendre des autres, et créer des liens avec de futurs partenaires professionnels.",
+    "authorId": 1,
+    "imgUrl": "https://img.freepik.com/photos-gratuite/amis-qui-etudient-pres-du-batiment-lac_23-2147850684.jpg?t=st=1735990836~exp=1735994436~hmac=9bd2e337fced6fdf2664e48766a55130d1f6536ef252cdc14345389747c77da2&w=1380",
+    "postDate": "2024-12-28T10:45:00"
+  }
 ]

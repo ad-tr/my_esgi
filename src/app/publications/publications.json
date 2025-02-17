@@ -1,10 +1,10 @@
 [
-    {
-        "id": 1,
-        "title": "Découvrez la vie étudiante à l'ESGI",
-        "description": "Plongez dans l'univers dynamique et innovant de l'ESGI, où les étudiants ne sont pas seulement formés, mais stimulés à créer, collaborer et innover. Entre les projets en équipe, les conférences avec des experts du secteur, et des événements de networking, la vie à l'ESGI est une aventure passionnante pour tous ceux qui veulent se préparer aux défis de demain.",
-        "authorId": 1,
-        "imgUrl": "https://img.freepik.com/photos-gratuite/temps-libre-etudiant-rythme-vie-du-campus-du-baccalaureat-cinq-etudiants-amicaux-marchent_8353-6408.jpg?t=st%3D1735990837~exp%3D1735994437~hmac%3D2901b669c0bb6957d7c5d8eb9a868cc9b9f3c8be9e8cdd49382d587569556286&w=1380",
-        "postDate": "2025-01-04T12:00:00"
-    }
+  {
+    "id": 1,
+    "title": "Découvrez la vie étudiante à l'ESGI",
+    "description": "Plongez dans l'univers dynamique et innovant de l'ESGI, où les étudiants ne sont pas seulement formés, mais stimulés à créer, collaborer et innover. Entre les projets en équipe, les conférences avec des experts du secteur, et des événements de networking, la vie à l'ESGI est une aventure passionnante pour tous ceux qui veulent se préparer aux défis de demain.",
+    "authorId": 1,
+    "imgUrl": "https://img.freepik.com/photos-gratuite/temps-libre-etudiant-rythme-vie-du-campus-du-baccalaureat-cinq-etudiants-amicaux-marchent_8353-6408.jpg?t=st%3D1735990837~exp%3D1735994437~hmac%3D2901b669c0bb6957d7c5d8eb9a868cc9b9f3c8be9e8cdd49382d587569556286&w=1380",
+    "postDate": "2025-01-04T12:00:00"
+  }
 ]

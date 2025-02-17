@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #D7E2FF;
-  --foreground: #283D72;
+  --background: #d7e2ff;
+  --foreground: #283d72;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -23,6 +23,6 @@ body {
 @layer utilities {
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
-      @apply appearance-none;
+    @apply appearance-none;
   }
 }
