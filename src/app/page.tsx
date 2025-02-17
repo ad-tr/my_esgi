@@ -17,7 +17,8 @@ export default function Home() {
 
     try {
       const response = await fetch(`https://api.adaoud.dev/users/Login?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`, {
-        method: 'POST'
+        method: 'POST',
+        credentials: "include"
       });
     
       if (response.status === 200) {
