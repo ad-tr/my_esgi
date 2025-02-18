@@ -33,7 +33,7 @@ export default function Posts() {
     const checkLogin = async () => {
       try {
         const response = await fetch(
-          "https://api.adaoud.dev/users/IsLoggedIn",
+          "http://10.255.0.6:8080/users/IsLoggedIn",
           {
             method: "GET",
             credentials: "include",
@@ -66,7 +66,7 @@ export default function Posts() {
         setErrorMessage(null);
 
         try {
-          const response = await fetch("https://api.adaoud.dev/Posts", {
+          const response = await fetch("http://10.255.0.6:8080/Posts", {
             method: "GET",
             credentials: "include",
           });
@@ -90,9 +90,9 @@ export default function Posts() {
   }, [isLoading]);
 
   const toggleFavorite = async (postId: number) => {
-    const urlCheck = `https://api.adaoud.dev/posts/CheckIfFavorite?postId=${postId}`;
-    const urlUnfavorite = `https://api.adaoud.dev/posts/UnfavoritePost?postId=${postId}`;
-    const urlFavorite = `https://api.adaoud.dev/posts/FavoritePost?postId=${postId}`;
+    const urlCheck = `http://10.255.0.6:8080/posts/CheckIfFavorite?postId=${postId}`;
+    const urlUnfavorite = `http://10.255.0.6:8080/posts/UnfavoritePost?postId=${postId}`;
+    const urlFavorite = `http://10.255.0.6:8080/posts/FavoritePost?postId=${postId}`;
 
     try {
         const checkResponse = await fetch(urlCheck, {

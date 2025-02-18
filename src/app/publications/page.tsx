@@ -33,7 +33,7 @@ export default function Publications() {
     const checkLogin = async () => {
       try {
         const response = await fetch(
-          "https://api.adaoud.dev/users/IsLoggedIn",
+          "http://10.255.0.6:8080/users/IsLoggedIn",
           {
             method: "GET",
             credentials: "include",
@@ -66,7 +66,7 @@ export default function Publications() {
         setErrorMessage(null);
 
         try {
-          const response = await fetch("https://api.adaoud.dev/posts/getuserposts", {
+          const response = await fetch("http://10.255.0.6:8080/posts/getuserposts", {
             method: "GET",
             credentials: "include",
           });
