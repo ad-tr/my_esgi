@@ -46,7 +46,7 @@ export default function DesktopNavbar() {
         console.log('a')
         if (response.status === 200) {
           const data = await response.json();
-          console.log(data)
+          console.log(data["IsAdmin"])
           if (data["IsAdmin"]) {
             console.log(data["IsAdmin"])
             setIsAdmin(true);
