@@ -146,7 +146,7 @@ export default function DesktopNavbar() {
 
               <button
                 onClick={() => setShowModal(true)}
-                className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]"
+                className="bg-[#38549d] text-white rounded-lg px-3 gap-3"
               >
                 <HiOutlinePlusCircle className="w-6 h-6 text-[#4074F8]" />
                 <p className="font-[family-name:var(--font-geist-sans)] text-base font-semibold">
@@ -196,13 +196,13 @@ export default function DesktopNavbar() {
               <div className="flex gap-4">
                 <button
                   onClick={handlePostSubmit}
-                  className="bg-blue-500 text-white p-2 rounded"
+                  className="bg-[#38549d] text-white rounded-lg px-3"
                 >
                   Ajouter
                 </button>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="bg-gray-300 p-2 rounded"
+                  className="bg-[#38549d] text-white rounded-lg px-3"
                 >
                   Annuler
                 </button>

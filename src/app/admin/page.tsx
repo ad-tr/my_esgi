@@ -44,7 +44,7 @@ export default function Admin() {
                                 <p><strong>Request:</strong> {request.description}</p>
                                 <p><strong>Status:</strong> {request.status}</p>
                                 {request.status === 'Pending' && (
-                                    <button onClick={() => handleRequest(index)} className="mt-2 bg-blue-500 text-white p-2 rounded">Accept</button>
+                                    <button onClick={() => handleRequest(index)} className="mt-2 bg-[#38549d] text-white rounded-lg px-3">Accept</button>
                                 )}
                             </div>
                         ))
@@ -70,7 +70,7 @@ export default function Admin() {
                             value={newItem.quantity}
                             onChange={(e) => setNewItem({ ...newItem, quantity: parseInt(e.target.value) || 0 })}
                         />
-                        <button onClick={addStockItem} className="bg-green-500 text-white p-2 rounded">Add Item</button>
+                        <button onClick={addStockItem} className="bg-[#38549d] p-2 text-white rounded-lg px-3">Add Item</button>
                     </div>
 
                     <div>
