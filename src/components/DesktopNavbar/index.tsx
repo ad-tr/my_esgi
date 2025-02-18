@@ -61,7 +61,7 @@ export default function DesktopNavbar() {
   const handlePostSubmit = async () => {
     try {
       console.log(JSON.stringify(post))
-      const response = await fetch("https://api.adaoud.dev/posts", {
+      const response = await fetch(`https://api.adaoud.dev/posts?title=${post.title}&description=${post.description}&imgurl=${post.imgUrl}`, {
         method: 'POST',
         credentials:"include",
         body: JSON.stringify(post)
