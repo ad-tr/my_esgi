@@ -19,7 +19,7 @@ export default function Inscription() {
 
     try {
       const response = await fetch(
-        `http://10.255.0.6:8080/users/Register?FirstName=${encodeURIComponent(firstName)}&LastName=${encodeURIComponent(lastName)}&Email=${encodeURIComponent(email)}&Password=${encodeURIComponent(password)}`,
+        `https://api.adaoud.dev/users/Register?FirstName=${encodeURIComponent(firstName)}&LastName=${encodeURIComponent(lastName)}&Email=${encodeURIComponent(email)}&Password=${encodeURIComponent(password)}`,
         {
           method: "POST",
         },

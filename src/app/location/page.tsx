@@ -18,7 +18,7 @@ export default function Rent() {
     const checkLogin = async () => {
       try {
         const response = await fetch(
-          "http://10.255.0.6:8080/users/IsLoggedIn",
+          "https://api.adaoud.dev/users/IsLoggedIn",
           {
             method: "GET",
             credentials: "include",

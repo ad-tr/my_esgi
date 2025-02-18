@@ -32,7 +32,7 @@ export default function Favoris() {
     const checkLogin = async () => {
       try {
         const response = await fetch(
-          "http://10.255.0.6:8080/users/IsLoggedIn",
+          "https://api.adaoud.dev/users/IsLoggedIn",
           {
             method: "GET",
             credentials: "include",
@@ -65,7 +65,7 @@ export default function Favoris() {
         setErrorMessage(null);
 
         try {
-          const response = await fetch("http://10.255.0.6:8080/posts/GetFavorites", {
+          const response = await fetch("https://api.adaoud.dev/posts/GetFavorites", {
             method: "GET",
             credentials: "include",
           });

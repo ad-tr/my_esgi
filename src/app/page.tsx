@@ -17,7 +17,7 @@ export default function Home() {
 
     try {
       const response = await fetch(
-        `http://10.255.0.6:8080/users/Login?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+        `https://api.adaoud.dev/users/Login?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
         {
           method: "POST",
           credentials: "include",
