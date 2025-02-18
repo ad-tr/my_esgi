@@ -64,7 +64,6 @@ export default function DesktopNavbar() {
       const response = await fetch(`https://api.adaoud.dev/posts?title=${post.title}&description=${post.description}&imgurl=${post.imgUrl}`, {
         method: 'POST',
         credentials:"include",
-        body: JSON.stringify(post)
       });
       if (response.status === 201) {
         setShowModal(false);
