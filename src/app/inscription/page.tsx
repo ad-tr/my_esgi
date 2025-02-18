@@ -26,7 +26,7 @@ export default function Inscription() {
       );
 
       if (response.status === 200) {
-        router.push("/posts");
+        router.push("/");
       } else {
         setErrorMessage(
           "Erreur lors de l'inscription. Veuillez vérifier vos informations.",

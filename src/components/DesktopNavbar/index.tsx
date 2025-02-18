@@ -17,12 +17,9 @@ export default function DesktopNavbar() {
   const [IsAdmin, setIsAdmin] = useState<boolean>(false);
   const [showModal, setShowModal] = useState(false);
   const [post, setPost] = useState({
-    id: 0,
     title: "",
     description: "",
-    authorId: 0,
     imgUrl: "",
-    postDate: "2025-02-18T10:19:53.522Z"
   });
 
   const handleLogout = async () => {
@@ -65,19 +62,15 @@ export default function DesktopNavbar() {
       const response = await fetch("https://api.adaoud.dev/posts", {
         method: 'POST',
         credentials:"include",
-        headers: {
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify(post)
       });
       if (response.status === 201) {
         setShowModal(false);
-        setPost({ id: 0,
+        setPost({
           title: "",
           description: "",
-          authorId: 0,
-          imgUrl: "",
-          postDate: "2025-02-18T10:19:53.522Z" });
+          imgUrl: ""
+        });
         alert("Post ajouté avec succès");
       } else {
         alert("Erreur lors de l'ajout du post");
