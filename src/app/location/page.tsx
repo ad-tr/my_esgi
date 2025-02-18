@@ -130,7 +130,7 @@ export default function Rent() {
                       type="number"
                       className="bg-[#D7E2FF] rounded-lg outline-0 p-2"
                     />
-                    <button className=" bg-[#38549d] text-white rounded-lg px-3">
+                    <button className=" bg-[#38549d] text-white rounded-lg">
                       Ajouter
                     </button>
                   </div>
