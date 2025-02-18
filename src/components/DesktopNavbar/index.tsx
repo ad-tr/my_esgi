@@ -68,10 +68,7 @@ export default function DesktopNavbar() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            title: 'My New Post',
-            content: 'This is the content of my post.'
-        })
+        body: JSON.stringify(post)
       });
       if (response.status === 201) {
         setShowModal(false);
@@ -154,11 +151,11 @@ export default function DesktopNavbar() {
 
               <button
                 onClick={() => setShowModal(true)}
-                className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff] mt-4"
+                className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]"
               >
                 <HiOutlinePlusCircle className="w-6 h-6 text-[#4074F8]" />
                 <p className="font-[family-name:var(--font-geist-sans)] text-base font-semibold">
-                  Ajouter un post
+                  Ajouter
                 </p>
               </button>
             </ul>

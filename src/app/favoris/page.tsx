@@ -183,8 +183,6 @@ export default function Favoris() {
 
                 <div className="flex justify-between m-2">
                   <div className="flex gap-3">
-                    <HiOutlineHeart className="w-6 h-6 text-[#4074F8] cursor-pointer hover:text-red-500" />
-                    <HiOutlineChat className="w-6 h-6 text-[#4074F8] cursor-pointer" />
                   </div>
                   <HiOutlineBookmark className="w-6 h-6 text-[#4074F8] cursor-pointer hover:text-yellow-500" />
                 </div>

@@ -5,8 +5,6 @@ import DesktopNavbar from "@/components/DesktopNavbar";
 import { HiOutlineSearch } from "react-icons/hi";
 import Image from "next/image";
 import {
-  HiOutlineChat,
-  HiOutlineHeart,
   HiOutlineInformationCircle,
   HiOutlineBookmark,
 } from "react-icons/hi";
@@ -15,9 +13,22 @@ import { useRouter } from "next/navigation";
 
 import posts from "./publications.json";
 
+type Post = {
+  id: number;
+  authorId: string;
+  postDate: string;
+  title: string;
+  description: string;
+  imgUrl?: string;
+  isFavorite?: boolean;
+};
+
 export default function Publications() {
   const router = useRouter();
   const [search, setSearch] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -50,6 +61,36 @@ export default function Publications() {
 
     checkLogin();
   }, [router]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const fetchPosts = async () => {
+        setLoading(true);
+        setErrorMessage(null);
+
+        try {
+          const response = await fetch("https://api.adaoud.dev/posts/getuserposts", {
+            method: "GET",
+            credentials: "include",
+          });
+
+          if (response.status === 200) {
+            const data = await response.json();
+            setPosts(data.map((post: Post) => ({ ...post, isFavorite: false })));
+          } else {
+            setErrorMessage("Erreur lors de la récupération des posts");
+          }
+        } catch (error) {
+          setErrorMessage("Erreur réseau lors de la récupération des posts.");
+          console.error("Erreur lors de la récupération des posts:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchPosts();
+    }
+  }, [isLoading]);
 
   const postToShow =
     search !== ""
@@ -141,8 +182,6 @@ export default function Publications() {
                 {/* Footer des actions */}
                 <div className="flex justify-between m-2">
                   <div className="flex gap-3">
-                    <HiOutlineHeart className="w-6 h-6 text-[#4074F8]" />
-                    <HiOutlineChat className="w-6 h-6 text-[#4074F8]" />
                   </div>
                   <HiOutlineBookmark className="w-6 h-6 text-[#4074F8]" />
                 </div>

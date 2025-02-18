@@ -5,8 +5,6 @@ import DesktopNavbar from "@/components/DesktopNavbar";
 import { HiOutlineSearch } from "react-icons/hi";
 import Image from "next/image";
 import {
-  HiOutlineChat,
-  HiOutlineHeart,
   HiOutlineInformationCircle,
   HiOutlineBookmark,
 } from "react-icons/hi";
@@ -222,8 +220,6 @@ export default function Posts() {
 
                 <div className="flex justify-between m-2">
                   <div className="flex gap-3">
-                    <HiOutlineHeart className="w-6 h-6 text-[#4074F8]" />
-                    <HiOutlineChat className="w-6 h-6 text-[#4074F8]" />
                   </div>
                   <HiOutlineBookmark
                     className={`w-6 h-6 ${post.isFavorite ? "text-yellow-500" : "text-[#4074F8]"} cursor-pointer`}
