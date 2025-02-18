@@ -31,7 +31,7 @@ export default function Admin() {
     return (
         <>
             <DesktopNavbar />
-            <div className="p-4 space-y-6 fixed right-0 w-full md:w-3/4 lg:w-4/5 xl:w-5/6">
+            <div className="p-4 space-y-6 fixed right-0 w-full md:w-3/4 lg:w-4/5 xl:w-5/6 -z-30">
                 <h1 className="text-2xl font-bold">Admin Dashboard</h1>
 
                 {/* User Requests Management */}
