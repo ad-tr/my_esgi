@@ -8,11 +8,43 @@ import {
   HiOutlineSearch,
 } from "react-icons/hi";
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import locations from "./location.json";
 
 export default function Rent() {
+  const router = useRouter();
   const [search, setSearch] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const response = await fetch("https://api.adaoud.dev/users/IsLoggedIn", {
+          method: "GET",
+          credentials: "include"
+        });
+
+        if (response.status === 200) {
+          const data = await response.json();
+          console.log(data["isLoggedIn"])
+          if (!data["isLoggedIn"]) {
+            router.push("/");
+          } else {
+            setIsLoading(false);
+          }
+        } else {
+          router.push("/");
+        }
+      } catch (error) {
+        console.log(error)
+        router.push("/");
+      }
+    };
+
+    checkLogin();
+  }, [router]);
+
 
   const filteredLocations =
     search !== ""
@@ -20,6 +52,10 @@ export default function Rent() {
           location.product.name.toLowerCase().includes(search.toLowerCase()),
         )
       : locations;
+
+      if (isLoading) {
+        return <p className="text-center text-blue-500 mt-10">Vérification en cours...</p>;
+      }
 
   return (
     <>

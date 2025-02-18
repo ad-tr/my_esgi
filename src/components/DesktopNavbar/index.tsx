@@ -15,15 +15,15 @@ export default function DesktopNavbar() {
   const router = useRouter();
 
   const handleLogout = async () => {
+
+    console.log('asdf')
     try {
-      const response = await fetch(`https://api.adaoud.dev/users/Logout}`, {
+      const response = await fetch(`https://api.adaoud.dev/users/Logout`, {
         method: 'POST',
         credentials: "include"
       });
     
       if (response.status === 200) {
-        const data = await response.json();
-        localStorage.setItem('authToken', data);
         router.push("/");
       }
     } catch (error) {
@@ -82,8 +82,7 @@ export default function DesktopNavbar() {
         </div>
 
         <div>
-          <Link
-            href="/"
+          <p
             className="flex items-center gap-3 hover:text-[#4074F8] active:hover:text-[#b0c7ff]"
             onClick={()=>handleLogout()}
           >
@@ -91,7 +90,7 @@ export default function DesktopNavbar() {
             <p className="font-[family-name:var(--font-geist-sans)] text-base font-semibold">
               Se déconnecter
             </p>
-          </Link>
+          </p>
         </div>
       </div>
     </div>
