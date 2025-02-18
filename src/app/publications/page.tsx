@@ -11,8 +11,6 @@ import {
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import posts from "./publications.json";
-
 type Post = {
   id: number;
   authorId: string;
@@ -44,8 +42,7 @@ export default function Publications() {
 
         if (response.status === 200) {
           const data = await response.json();
-          console.log(data["isLoggedIn"]);
-          if (!data["isLoggedIn"]) {
+          if (!data.isLoggedIn) {
             router.push("/");
           } else {
             setIsLoading(false);
@@ -54,7 +51,7 @@ export default function Publications() {
           router.push("/");
         }
       } catch (error) {
-        console.log(error);
+        console.error("Login check failed:", error);
         router.push("/");
       }
     };
@@ -92,10 +89,16 @@ export default function Publications() {
     }
   }, [isLoading]);
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
   const postToShow =
     search !== ""
       ? posts.filter(
-          (post) => post.description && post.description.includes(search),
+          (post) =>
+            post.description?.toLowerCase().includes(search.toLowerCase()) ||
+            post.title?.toLowerCase().includes(search.toLowerCase())
         )
       : posts;
 
@@ -107,6 +110,22 @@ export default function Publications() {
     );
   }
 
+  if (loading) {
+    return (
+      <p className="text-center text-blue-500 mt-10">
+        Chargement des posts en cours...
+      </p>
+    );
+  }
+
+  if (errorMessage) {
+    return (
+      <p className="text-center text-red-500 mt-10">
+        {errorMessage}
+      </p>
+    );
+  }
+
   return (
     <>
       <DesktopNavbar />
@@ -114,18 +133,19 @@ export default function Publications() {
         <div className="w-full p-2">
           <div className="flex w-full justify-center gap-3">
             <div className="flex w-3/5">
-              <div className="flex w-full h-10 items-center gap-2 bg-slate-50 rounded-lg">
+              <div className="flex w-full h-10 items-center gap-2 bg-slate-50 rounded-lg shadow-md">
                 <input
                   type="text"
                   placeholder="Rechercher"
-                  onChange={(e) => setSearch(e.target.value)}
+                  value={search}
+                  onChange={handleSearch}
                   className="bg-transparent w-full h-10 outline-none px-2"
                 />
-                <HiOutlineSearch className="w-6 h-6 text-[#4074F8] m-1" />
+                <HiOutlineSearch className="w-6 h-6 text-[#4074F8] m-1 cursor-pointer" />
               </div>
             </div>
 
-            <div className="absolute flex bg-[#4074F8] w-10 h-10 top-0 right-0 m-2 rounded-full items-center justify-center text-white">
+            <div className="absolute flex bg-[#4074F8] w-10 h-10 top-0 right-0 m-2 rounded-full items-center justify-center text-white cursor-pointer">
               A
             </div>
           </div>
@@ -136,37 +156,32 @@ export default function Publications() {
         {postToShow.length > 0 ? (
           postToShow.map((post) => (
             <div key={post.id} className="flex w-full justify-center mb-5">
-              <div className="w-[25em] md:w-[30em] lg:w-[30em] bg-slate-50 p-3 rounded-xl">
+              <div className="w-[25em] md:w-[30em] lg:w-[30em] bg-slate-50 p-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                 <div className="flex justify-between">
                   <div className="flex gap-6 items-center mb-3">
                     <p className="bg-[#4074F8] w-9 h-9 rounded-full flex justify-center items-center font-bold text-slate-50">
                       {post.authorId}
                     </p>
                     <div>
-                      <p className="font-[family-name:var(--font-geist-sans)] text-md font-medium leading-5">
-                        Vous
-                      </p>
-                      <p className="font-[family-name:var(--font-geist-sans)] text-sm text-gray-500">
-                        Posté le{" "}
-                        {new Date(post.postDate).toLocaleDateString("fr-FR", {
+                      <p className="text-md font-medium leading-5">Vous</p>
+                      <p className="text-sm text-gray-500">
+                        Posté le {new Date(post.postDate).toLocaleDateString("fr-FR", {
                           day: "2-digit",
                           month: "long",
                           year: "numeric",
-                        })}{" "}
-                        à{" "}
-                        {new Date(post.postDate).toLocaleTimeString("fr-FR", {
+                        })} à {new Date(post.postDate).toLocaleTimeString("fr-FR", {
                           hour: "2-digit",
                           minute: "2-digit",
                         })}
                       </p>
                     </div>
                   </div>
-                  <HiOutlineInformationCircle className="w-6 h-6 text-[#4074F8]" />
+                  <HiOutlineInformationCircle className="w-6 h-6 text-[#4074F8] cursor-pointer hover:text-blue-700" />
                 </div>
 
                 <div>
                   <h3 className="font-bold text-lg mb-2">{post.title}</h3>
-                  <p className="leading-5 text-sm mb-2">{post.description}</p>
+                  <p className="leading-5 text-sm mb-2 text-gray-700">{post.description}</p>
                 </div>
 
                 {post.imgUrl && (
@@ -175,15 +190,12 @@ export default function Publications() {
                     alt={post.title}
                     width={500}
                     height={500}
-                    className="rounded-lg"
+                    className="rounded-lg object-cover"
                   />
                 )}
 
-                {/* Footer des actions */}
-                <div className="flex justify-between m-2">
-                  <div className="flex gap-3">
-                  </div>
-                  <HiOutlineBookmark className="w-6 h-6 text-[#4074F8]" />
+                <div className="flex justify-end m-2">
+                  <HiOutlineBookmark className="w-6 h-6 text-[#4074F8] cursor-pointer hover:text-blue-700" />
                 </div>
               </div>
             </div>

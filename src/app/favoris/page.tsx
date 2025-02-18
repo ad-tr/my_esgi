@@ -5,8 +5,6 @@ import DesktopNavbar from "@/components/DesktopNavbar";
 import { HiOutlineSearch } from "react-icons/hi";
 import Image from "next/image";
 import {
-  HiOutlineChat,
-  HiOutlineHeart,
   HiOutlineInformationCircle,
   HiOutlineBookmark,
 } from "react-icons/hi";
