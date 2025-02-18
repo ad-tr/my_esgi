@@ -24,7 +24,7 @@ export default function DesktopNavbar() {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(`https://api.adaoud.dev/users/Logout`, {
+      const response = await fetch(`https://10.255.0.6:8080/users/Logout`, {
         method: "POST",
         credentials: "include",
       });
@@ -39,7 +39,7 @@ export default function DesktopNavbar() {
   useEffect(() => {
     const checkIsAdmin = async () => {
       try {
-        const response = await fetch("https://api.adaoud.dev/users/IsAdmin", {
+        const response = await fetch("https://10.255.0.6:8080/users/IsAdmin", {
           method: "GET",
           credentials: "include",
         });
@@ -61,7 +61,7 @@ export default function DesktopNavbar() {
   const handlePostSubmit = async () => {
     try {
       console.log(JSON.stringify(post))
-      const response = await fetch("https://api.adaoud.dev/posts", {
+      const response = await fetch("https://10.255.0.6:8080/posts", {
         method: 'POST',
         credentials:"include",
         body: JSON.stringify(post)
