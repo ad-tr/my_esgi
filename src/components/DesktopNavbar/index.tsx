@@ -202,7 +202,7 @@ export default function DesktopNavbar() {
                 </button>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="bg-[#38549d] text-white rounded-lg px-3"
+                  className=" rounded-lg px-3"
                 >
                   Annuler
                 </button>
