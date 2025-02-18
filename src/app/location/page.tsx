@@ -3,10 +3,7 @@ import MobileNavbar from "@/components/MobileNavbar";
 import DesktopNavbar from "@/components/DesktopNavbar";
 import Image from "next/image";
 
-import {
-  HiOutlineInformationCircle,
-  HiOutlineSearch,
-} from "react-icons/hi";
+import { HiOutlineInformationCircle, HiOutlineSearch } from "react-icons/hi";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -20,14 +17,17 @@ export default function Rent() {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const response = await fetch("https://api.adaoud.dev/users/IsLoggedIn", {
-          method: "GET",
-          credentials: "include"
-        });
+        const response = await fetch(
+          "https://api.adaoud.dev/users/IsLoggedIn",
+          {
+            method: "GET",
+            credentials: "include",
+          },
+        );
 
         if (response.status === 200) {
           const data = await response.json();
-          console.log(data["isLoggedIn"])
+          console.log(data["isLoggedIn"]);
           if (!data["isLoggedIn"]) {
             router.push("/");
           } else {
@@ -37,7 +37,7 @@ export default function Rent() {
           router.push("/");
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         router.push("/");
       }
     };
@@ -53,9 +53,13 @@ export default function Rent() {
         )
       : locations;
 
-      if (isLoading) {
-        return <p className="text-center text-blue-500 mt-10">Vérification en cours...</p>;
-      }
+  if (isLoading) {
+    return (
+      <p className="text-center text-blue-500 mt-10">
+        Vérification en cours...
+      </p>
+    );
+  }
 
   return (
     <>

@@ -20,6 +20,7 @@ type Post = {
   title: string;
   description: string;
   imgUrl?: string;
+  isFavorite?: boolean;
 };
 
 export default function Posts() {
@@ -33,15 +34,17 @@ export default function Posts() {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const response = await fetch("https://api.adaoud.dev/users/IsLoggedIn", {
-          method: "GET",
-          credentials: "include"
-        });
+        const response = await fetch(
+          "https://api.adaoud.dev/users/IsLoggedIn",
+          {
+            method: "GET",
+            credentials: "include",
+          },
+        );
 
         if (response.status === 200) {
           const data = await response.json();
-          console.log(data["isLoggedIn"])
-          if (!data["isLoggedIn"]) {
+          if (!data.isLoggedIn) {
             router.push("/");
           } else {
             setIsLoading(false);
@@ -50,7 +53,7 @@ export default function Posts() {
           router.push("/");
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         router.push("/");
       }
     };
@@ -67,12 +70,12 @@ export default function Posts() {
         try {
           const response = await fetch("https://api.adaoud.dev/Posts", {
             method: "GET",
-            credentials: "include"
+            credentials: "include",
           });
 
           if (response.status === 200) {
             const data = await response.json();
-            setPosts(data);
+            setPosts(data.map((post: Post) => ({ ...post, isFavorite: false })));
           } else {
             setErrorMessage("Erreur lors de la récupération des posts");
           }
@@ -88,19 +91,65 @@ export default function Posts() {
     }
   }, [isLoading]);
 
+  const toggleFavorite = async (postId: number) => {
+    const urlCheck = `https://api.adaoud.dev/posts/CheckIfFavorite?postId=${postId}`;
+    const urlUnfavorite = `https://api.adaoud.dev/posts/UnfavoritePost?postId=${postId}`;
+    const urlFavorite = `https://api.adaoud.dev/posts/FavoritePost?postId=${postId}`;
+
+    try {
+        const checkResponse = await fetch(urlCheck, {
+            method: "POST",
+            credentials: "include",
+        });
+
+        if (!checkResponse.ok) {
+            throw new Error("Erreur lors de la vérification du statut de favori");
+        }
+
+        const isFavorite = await checkResponse.json();
+
+        const url = isFavorite ? urlFavorite : urlUnfavorite;
+        console.log(isFavorite)
+        console.log(url)
+        const response = await fetch(url, {
+            method: "POST",
+            credentials: "include",
+        });
+
+        if (response.status === 200) {
+            setPosts((prevPosts) =>
+                prevPosts.map((post) =>
+                    post.id === postId ? { ...post, isFavorite: !isFavorite } : post
+                )
+            );
+        } else {
+            console.error("Erreur lors de la mise à jour des favoris");
+        }
+    } catch (error) {
+        console.error("Erreur réseau lors de la mise à jour des favoris:", error);
+    }
+};
+
+
   if (isLoading) {
-    return <p className="text-center text-blue-500 mt-10">Vérification en cours...</p>;
+    return (
+      <p className="text-center text-blue-500 mt-10">
+        Vérification en cours...
+      </p>
+    );
   }
 
   const postToShow =
     search !== ""
-      ? posts.filter((post) => post.description && post.description.includes(search))
+      ? posts.filter(
+          (post) => post.description && post.description.includes(search),
+        )
       : posts;
 
   return (
     <>
       <DesktopNavbar />
-      <div className="fixed right-0 w-full md:w-3/4 lg:w-4/5 xl:w-5/6 z-10">
+      <div className="fixed right-0 w-full md:w-3/4 lg:w-4/5 xl:w-5/6 -z-30">
         <div className="w-full p-2">
           <div className="flex w-full justify-center gap-3">
             <div className="flex w-3/5">
@@ -118,9 +167,11 @@ export default function Posts() {
         </div>
       </div>
 
-      <div className="flex-col absolute w-full md:w-3/4 lg:w-4/5 xl:w-5/6 md:right-0 mt-20 justify-center">
+      <div className="flex-col absolute w-full md:w-3/4 lg:w-4/5 xl:w-5/6 md:right-0 mt-20 justify-center -z-30">
         {loading ? (
-          <p className="text-center text-blue-500">Chargement des posts en cours...</p>
+          <p className="text-center text-blue-500">
+            Chargement des posts en cours...
+          </p>
         ) : errorMessage ? (
           <p className="text-center text-red-500">{errorMessage}</p>
         ) : postToShow.length > 0 ? (
@@ -174,7 +225,10 @@ export default function Posts() {
                     <HiOutlineHeart className="w-6 h-6 text-[#4074F8]" />
                     <HiOutlineChat className="w-6 h-6 text-[#4074F8]" />
                   </div>
-                  <HiOutlineBookmark className="w-6 h-6 text-[#4074F8]" />
+                  <HiOutlineBookmark
+                    className={`w-6 h-6 ${post.isFavorite ? "text-yellow-500" : "text-[#4074F8]"} cursor-pointer`}
+                    onClick={() => toggleFavorite(post.id)}
+                  />
                 </div>
               </div>
             </div>

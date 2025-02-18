@@ -16,14 +16,17 @@ export default function Home() {
     setErrorMessage(null);
 
     try {
-      const response = await fetch(`https://api.adaoud.dev/users/Login?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`, {
-        method: 'POST',
-        credentials: "include"
-      });
-    
+      const response = await fetch(
+        `https://api.adaoud.dev/users/Login?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+        {
+          method: "POST",
+          credentials: "include",
+        },
+      );
+
       if (response.status === 200) {
         const data = await response.json();
-        localStorage.setItem('authToken', data);
+        localStorage.setItem("authToken", data);
         router.push("/posts");
       } else {
         setErrorMessage("Identifiant ou mot de passe incorrect.");
@@ -34,7 +37,6 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-
   };
 
   return (

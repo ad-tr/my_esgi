@@ -21,14 +21,16 @@ export default function Inscription() {
       const response = await fetch(
         `https://api.adaoud.dev/users/Register?FirstName=${encodeURIComponent(firstName)}&LastName=${encodeURIComponent(lastName)}&Email=${encodeURIComponent(email)}&Password=${encodeURIComponent(password)}`,
         {
-          method: 'POST'
-        }
+          method: "POST",
+        },
       );
 
       if (response.status === 200) {
         router.push("/posts");
       } else {
-        setErrorMessage("Erreur lors de l'inscription. Veuillez vérifier vos informations.");
+        setErrorMessage(
+          "Erreur lors de l'inscription. Veuillez vérifier vos informations.",
+        );
       }
     } catch (error) {
       setErrorMessage("Erreur réseau lors de l'inscription.");
@@ -105,7 +107,10 @@ export default function Inscription() {
               </button>
             </div>
             <p className="font-[family-name:var(--font-geist-sans)] font-light text-xs">
-              Déjà un compte ? <Link href="/" className="underline">Connectez-vous</Link>
+              Déjà un compte ?{" "}
+              <Link href="/" className="underline">
+                Connectez-vous
+              </Link>
             </p>
           </div>
         </div>
