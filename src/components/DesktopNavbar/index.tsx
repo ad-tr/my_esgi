@@ -146,7 +146,7 @@ export default function DesktopNavbar() {
 
               <button
                 onClick={() => setShowModal(true)}
-                className="bg-[#38549d] text-white rounded-lg px-3 gap-3"
+                className=" px-3 gap-3"
               >
                 <HiOutlinePlusCircle className="w-6 h-6 text-[#4074F8]" />
                 <p className="font-[family-name:var(--font-geist-sans)] text-base font-semibold">
